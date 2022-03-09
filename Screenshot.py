@@ -5,7 +5,7 @@ import cv2 as cv
 from pynput.mouse import Listener
 from PIL import ImageGrab, Image
 
-tracker = np.zeros((2, 2), 'int16') #for keeping track of cursor position, 2 dimensional because one is of starting pos and other is ending pos
+tracker = np.zeros((2, 2), 'uint16') #for keeping track of cursor position, 2 dimensional because one is of starting pos and other is ending pos
 
 def onMouseDown(*args):
     global tracker #because this function executes always on mouse click, so to let 'em not reset
