@@ -4,6 +4,7 @@ import numpy as np
 import cv2 as cv
 from pynput.mouse import Listener
 from PIL import ImageGrab, Image
+from sys import platform
 
 tracker = np.zeros((2, 2), 'uint16') #for keeping track of cursor position, 2 dimensional because one is of starting pos and other is ending pos
 
@@ -20,7 +21,7 @@ def onMouseDown(*args):
         else:
             cropped_ = screenshot[tracker[1, 1]:tracker[0, 1], tracker[1, 0]:tracker[0, 0]] #if not, then the ending pos    
             
-        bg_to = cv.COLOR_RGBA2BGRA if platform.system() == "Darwin" else cv.COLOR_RGB2BGR #setting default color space of os, BGRA and RGBA is default in MacOS while BGR and RGB in Windows and GNU/Linux
+        bg_to = cv.COLOR_RGBA2BGRA if platform == "darwin" else cv.COLOR_RGB2BGR #setting default color space of os, BGRA and RGBA is default in MacOS while BGR and RGB in Windows and GNU/Linux
         cropped = cv.cvtColor(cropped_, bg_to) #converting to RGB/RGBA to avoid color conflicts
         cv.imshow('Screenshot', cropped)
         cv.waitKey(0)
